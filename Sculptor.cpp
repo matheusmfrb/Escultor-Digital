@@ -139,13 +139,24 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
 };
 
 void Sculptor::writeOFF(string filename){
+    int vertices=0, faces=0;
     ofstream arquivo;
     int aux=0;
     arquivo.open(filename);
+    for(int i=0;i<nx;i++){
+        for(int j=0;j<ny;j++){
+            for(int k=0;k<nz;k++){
+                if(v[i][j][k].isOn==true){
+                    vertices+=8;
+                    faces=+6;
+                }
+            }
+        }
+    }
     if(arquivo.is_open()){
         cout << "O arquivo foi aberto!" << endl;
         arquivo << "OFF" << endl;
-        arquivo << "8" << " " << "6" << " " << "0" << endl;
+        arquivo << vertices << " " << faces << " " << 0 << endl;
         for(int i=0;i<nx;i++){
             for(int j=0;j<ny;j++){
                 for(int k=0;k<nz;k++){
