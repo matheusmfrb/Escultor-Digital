@@ -114,7 +114,7 @@ void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
     for(int i=0;i<nx;i++){
         for(int j=0;j<ny;j++){
             for(int k=0;k<nz;k++){
-                if((pow(((i-xcenter)/rx),2)+pow(((j-ycenter)/ry),2)+pow(((k-zcenter)/rz),2)) <= 1){
+                if(1.0*(double((pow(((i-xcenter)/(rx*1.0)),2)+pow(((j-ycenter)/(ry*1.0)),2)+pow(((k-zcenter)/(rz*1.0)),2)))) <= 1.0){
                     v[i][j][k].isOn = true;
                     v[i][j][k].r = r;
                     v[i][j][k].g = g;
@@ -130,7 +130,7 @@ void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int r
     for(int i=0;i<nx;i++){
         for(int j=0;j<ny;j++){
             for(int k=0;k<nz;k++){
-                if((pow(((i-xcenter)/rx),2)+pow(((j-ycenter)/ry),2)+pow(((k-zcenter)/rz),2)) <= 1){
+                if(1.0*(double((pow(((i-xcenter)/(rx*1.0)),2)+pow(((j-ycenter)/(ry*1.0)),2)+pow(((k-zcenter)/(rz*1.0)),2)))) <= 1.0){
                     v[i][j][k].isOn = false;
                 }
             }
@@ -148,7 +148,7 @@ void Sculptor::writeOFF(string filename){
             for(int k=0;k<nz;k++){
                 if(v[i][j][k].isOn==true){
                     vertices+=8;
-                    faces=+6;
+                    faces+=6;
                 }
             }
         }
